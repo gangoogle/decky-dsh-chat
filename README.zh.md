@@ -51,7 +51,7 @@ sudo systemctl enable --now sshd
 
 ### 第 2 步 — 安装 Node.js 22+（用户级，免 sudo）
 
-`dsh` 要求 Node `^22.19.0 || >=24.0.0`。用官方二进制包装到用户目录（不动系统）：
+`dsh` 要求 Node `^22.19.0 || >=24.0.0`。官方文档默认你已经装好了 Node + pnpm——但全新 Steam Deck **出厂不带 Node**，所以这是唯一需要自己补的依赖。用官方二进制包装到用户目录（不动系统）：
 
 ```bash
 mkdir -p ~/.local/lib/nodejs

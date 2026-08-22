@@ -51,7 +51,7 @@ sudo systemctl enable --now sshd
 
 ### Step 2 — Install Node.js 22+ (user-level, no sudo)
 
-`dsh` requires Node `^22.19.0 || >=24.0.0`. Install the official binary tarball into your home directory:
+`dsh` requires Node `^22.19.0 || >=24.0.0`. The official docs assume Node + pnpm are already installed — but a fresh Steam Deck ships **without** Node, so this is the one prerequisite you must add yourself. Install the official binary tarball into your home directory:
 
 ```bash
 mkdir -p ~/.local/lib/nodejs
