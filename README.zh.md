@@ -75,35 +75,32 @@ node -v   # v22.x.x
 pnpm -v   # 10.x.x
 ```
 
-### 第 3 步 — 源码安装 dsh（安装版）
+### 第 3 步 — 源码安装 dsh（官方原版）
 
-> 这是**安装版**——就是 DSH Chat 插件所依赖的 `PATH` 里的 `dsh`。和一次性 `npx @deepseek-ai/dsh web` 不同：构建一次后离线可用，维护本地 `~/.dsh` profile 体系，支持插件（`dsh-tui`、`web` 等）。
+和官方 "Run from source" 完全一致：
 
 ```bash
 cd ~
 git clone https://github.com/deepseek-ai/deepseek-harness.git
 cd deepseek-harness
-pnpm install          # 安装依赖（首次较久）
-pnpm run build        # 构建产物
-
-# 把 dsh 装进 PATH
-ln -sf ~/deepseek-harness/apps/cli/lib/bin.js ~/.local/bin/dsh
-
-# 验证
-dsh --help            # 出现用法说明即成功
+pnpm install
+pnpm run build
+pnpm dsh web        # 启动 Web UI (http://127.0.0.1:3080)
 ```
 
-任意 profile 首次启动会在 `~/.dsh/profiles/` 初始化并安装依赖（需要网络，稍等片刻）：
+就这几行。**只有用 DSH Chat 插件时才需要多加一行**——插件会自己从 `PATH` 里调用 `dsh web`，所以要把 `dsh` 全局化：
 
 ```bash
-dsh web --no-open     # 初始化 web profile
+ln -sf ~/deepseek-harness/apps/cli/lib/bin.js ~/.local/bin/dsh
 ```
+
+任意 profile 首次启动会在 `~/.dsh/profiles/` 初始化并安装依赖（需要网络，稍等片刻）。
 
 ### 第 4 步 — 配置 API Key
 
 **推荐——Web UI 方式（只写存储，插件启动的服务也能读到）：**
 
-1. 启动服务：`dsh web --no-open`
+1. 启动服务：`pnpm dsh web --no-open`（如果做了上面的软链，也可以用 `dsh web --no-open`）
 2. 浏览器打开 `http://127.0.0.1:3080`
 3. **设置 → Providers → DeepSeek** → 粘贴来自 [platform.deepseek.com](https://platform.deepseek.com/) 的密钥 → 保存
 4. 密钥存入 `~/.dsh/.credentials.yaml`（只写，不回显）

@@ -75,35 +75,32 @@ node -v   # v22.x.x
 pnpm -v   # 10.x.x
 ```
 
-### Step 3 — Install `dsh` from source (the installed version)
+### Step 3 — Install `dsh` from source (official way)
 
-> This is the **installed** build — the same thing this plugin expects on `PATH`. Unlike the one-shot `npx @deepseek-ai/dsh web`, it runs offline once built, keeps a local `~/.dsh` profile tree, and supports plugins (`dsh-tui`, `web`, …).
+Exactly the official "Run from source" flow:
 
 ```bash
 cd ~
 git clone https://github.com/deepseek-ai/deepseek-harness.git
 cd deepseek-harness
-pnpm install          # install dependencies (first run takes a while)
-pnpm run build        # build artifacts
-
-# Put dsh on PATH
-ln -sf ~/deepseek-harness/apps/cli/lib/bin.js ~/.local/bin/dsh
-
-# Verify
-dsh --help            # usage should print
+pnpm install
+pnpm run build
+pnpm dsh web        # starts the Web UI at http://127.0.0.1:3080
 ```
 
-First launch of any profile downloads/installs its bundles into `~/.dsh/profiles/` (needs network, takes a moment):
+That's it. One extra line **only if you use this plugin** — the plugin launches `dsh web` itself from `PATH`, so make `dsh` globally available:
 
 ```bash
-dsh web --no-open     # initialize the web profile
+ln -sf ~/deepseek-harness/apps/cli/lib/bin.js ~/.local/bin/dsh
 ```
+
+The first launch of a profile installs its bundles into `~/.dsh/profiles/` (needs network, takes a moment).
 
 ### Step 4 — Configure your API key
 
 **Recommended — via the Web UI (write-only storage, works with this plugin):**
 
-1. Start the server: `dsh web --no-open`
+1. Start the server: `pnpm dsh web --no-open` (or `dsh web --no-open` if you created the symlink above)
 2. Open `http://127.0.0.1:3080` in a browser
 3. **Settings → Providers → DeepSeek** → paste your key from [platform.deepseek.com](https://platform.deepseek.com/) → Save
 4. The key is stored in `~/.dsh/.credentials.yaml` (write-only)
