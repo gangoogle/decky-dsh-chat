@@ -1,0 +1,12 @@
+node_modules/
+packages/
+dist/
+src/
+tsconfig.json
+rollup.config.js
+decky.pyi
+pnpm-lock.yaml
+package.sh
+*.pyc
+__pycache__/
+.DS_Store

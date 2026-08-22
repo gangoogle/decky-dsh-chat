@@ -1,0 +1,16 @@
+{
+  "name": "DSH Chat",
+  "author": "deck",
+  "version": "0.1.1",
+  "flags": [],
+  "api_version": 1,
+  "publish": {
+    "tags": [
+      "ai",
+      "chat",
+      "deepseek",
+      "harness"
+    ],
+    "description": "Chat with the local DeepSeek Harness right from Gaming Mode."
+  }
+}
